@@ -1489,6 +1489,13 @@
         min-height: 440px;
       }
 
+      .chat-widget {
+        width: calc(100vw - 36px);
+        right: 18px;
+        left: 18px;
+        max-height: 70vh;
+      }
+
       .floating-quote {
         position: static;
         width: min(100% - 36px, 480px);
@@ -1497,7 +1504,7 @@
 
       .floating-contact {
         left: 50%;
-        bottom: 12px;
+        bottom: 88px;
         transform: translateX(-50%);
         width: min(100% - 24px, 420px);
       }
@@ -1539,6 +1546,15 @@
         display: none;
       }
 
+      .language-selector {
+        gap: 4px;
+      }
+
+      .lang-btn {
+        min-width: 38px;
+        font-size: 11px;
+      }
+
       .hero {
         padding-top: 108px;
       }
@@ -1554,6 +1570,27 @@
       .room-preview,
       .sample-swipe {
         min-height: 480px;
+      }
+
+      .chat-widget {
+        width: calc(100vw - 24px);
+        right: 12px;
+        left: 12px;
+        bottom: 80px;
+        max-height: 60vh;
+        border-radius: 8px;
+      }
+
+      .chat-messages {
+        max-height: 300px;
+      }
+
+      .chat-toggle {
+        right: 12px;
+        bottom: 12px;
+        width: 50px;
+        height: 50px;
+        font-size: 22px;
       }
     }
   </style>
@@ -2680,7 +2717,192 @@
     const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
     setLanguage(savedLanguage);
 
-    const money = new Intl.NumberFormat("en-IN", { maximumFractionDigits: 1 });
+    // Chat Widget and AI Agent
+    const chatWidget = document.getElementById('chatWidget');
+    const chatToggle = document.getElementById('chatToggle');
+    const chatClose = document.getElementById('chatClose');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const chatSend = document.getElementById('chatSend');
+    const chatTitle = document.getElementById('chatTitle');
+    const chatStatus = document.getElementById('chatStatus');
+
+    let currentLanguage = localStorage.getItem('selectedLanguage') || 'en';
+    let chatHistory = [];
+
+    // AI Agent Responses
+    const aiResponses = {
+      en: {
+        greeting: "Hello! 👋 I'm SMAG's AI assistant. How can I help you today?",
+        pricing: "We have three main packages:\n• 2BHK: ₹4.5L\n• 3BHK: ₹6.0L\n• 4BHK: ₹8.8L\n\nAll include modular kitchen, wardrobes, TV unit, false ceiling, and 10-year warranty. Would you like more details?",
+        consultation: "I'd be happy to help you book a free consultation! You can:\n✓ Chat with me for quick questions\n✓ Connect to our team for a site visit\n✓ Call us at 7981967007",
+        services: "SMAG Interiors offers:\n✓ Modular Kitchens\n✓ Luxury Wardrobes\n✓ TV Units & Panels\n✓ False Ceilings\n✓ Lighting & Electrical\n✓ Complete Home Solutions\n\nWhat interests you?",
+        warranty: "We provide a comprehensive 10-year warranty on all our work, ensuring quality and peace of mind.",
+        contact: "You can reach us at:\n📞 7981967007\n💬 WhatsApp: 7981967007\n📧 smaginteriors@gmail.com",
+        process: "Our process is simple:\n1. Free consultation\n2. Site measurement\n3. 3D design\n4. Material selection\n5. Factory manufacturing\n6. Professional installation\n7. Handover & support",
+        default: "Thanks for your message! I can help with:\n• Pricing & Packages\n• Our Services\n• Consultation booking\n• Contact information\n• Our process\n\nOr connect with our team for personalized support.",
+        connectAgent: "Would you like to connect with our support team?",
+        agentConnected: "Connecting you with our support team...",
+        agentStatus: "Agent Active"
+      },
+      hi: {
+        greeting: "नमस्ते! 👋 मैं SMAG का AI सहायक हूं। मैं आपकी कैसे मदद कर सकता हूं?",
+        pricing: "हमारे तीन मुख्य पैकेज हैं:\n• 2BHK: ₹4.5L\n• 3BHK: ₹6.0L\n• 4BHK: ₹8.8L\n\nसभी में मॉड्यूलर रसोई, अलमारी, टीवी यूनिट, झूठी छत और 10 साल की वारंटी शामिल है। क्या आप और विवरण चाहते हैं?",
+        consultation: "मैं आपको मुफ्त परामर्श बुक करने में मदद करूंगा! आप कर सकते हैं:\n✓ मेरे साथ त्वरित प्रश्नों के लिए चैट करें\n✓ साइट विजिट के लिए हमारी टीम से जुड़ें\n✓ हमें 7981967007 पर कॉल करें",
+        services: "SMAG इंटीरियर्स प्रदान करता है:\n✓ मॉड्यूलर रसोई\n✓ विलासवान अलमारी\n✓ टीवी यूनिट और पैनल\n✓ झूठी छतें\n✓ प्रकाश और विद्युत\n✓ पूर्ण घर समाधान\n\nआपको क्या दिलचस्पी है?",
+        warranty: "हम सभी काम पर 10 साल की व्यापक वारंटी प्रदान करते हैं।",
+        contact: "आप हमसे संपर्क कर सकते हैं:\n📞 7981967007\n💬 व्हाट्सऐप: 7981967007\n📧 smaginteriors@gmail.com",
+        process: "हमारी प्रक्रिया सरल है:\n1. मुफ्त परामर्श\n2. साइट माप\n3. 3D डिजाइन\n4. सामग्री चयन\n5. कारखाना विनिर्माण\n6. व्यावसायिक स्थापना\n7. हस्तांतरण और समर्थन",
+        default: "आपके संदेश के लिए धन्यवाद! मैं सहायता कर सकता हूं:\n• मूल्य निर्धारण और पैकेज\n• हमारी सेवाएं\n• परामर्श बुकिंग\n• संपर्क जानकारी\n• हमारी प्रक्रिया\n\nया व्यक्तिगत समर्थन के लिए हमारी टीम से जुड़ें।",
+        connectAgent: "क्या आप हमारी सहायता टीम से जुड़ना चाहते हैं?",
+        agentConnected: "आपको हमारी सहायता टीम से जोड़ा जा रहा है...",
+        agentStatus: "एजेंट सक्रिय"
+      },
+      te: {
+        greeting: "హలో! 👋 నేను SMAG యొక్క AI సహాయకుడిని. నేను మీకు ఎలా సహాయం చేయగలను?",
+        pricing: "మాకు మూడు ప్రధాన ప్యాకేజీలు ఉన్నాయి:\n• 2BHK: ₹4.5L\n• 3BHK: ₹6.0L\n• 4BHK: ₹8.8L\n\nసभీలో మాడ్యులర్ రసోడు, అల్మారీలు, టీవీ యూనిట్, తప్పుడు ఛాయం మరియు 10 సంవత్సర వారెంటీ ఉన్నాయి. మీకు మరిన్ని వివరాలు కావాలా?",
+        consultation: "నేను మీకు ఉచిత పరామర్శ బుక్ చేయడంలో సహాయం చేయడానికి సంతోషిస్తున్నాను! మీరు చేయవచ్చు:\n✓ త్వరిత ప్రశ్నల కోసం నాతో చాట్ చేయండి\n✓ సైట్ సందర్శన కోసం మా టీమ్‌కు కనెక్ట్ చేయండి\n✓ 7981967007కు కాల్ చేయండి",
+        services: "SMAG ఇంటీరియర్‌లు అందిస్తుంది:\n✓ మాడ్యులర్ రసోడు\n✓ విలాసవంత అల్మారీలు\n✓ టీవీ యూనిట్‌లు మరియు పానెళ్ళు\n✓ తప్పుడు ఛాయంలు\n✓ కాంతి మరియు విద్యుత్\n✓ పూర్తి ఇంటి సమాధానాలు\n\nమీకు ఏ విషయం ఆకర్షణ చేసింది?",
+        warranty: "మేము సమస్త పనిపై 10 సంవత్సర వారెంటీ అందిస్తాము.",
+        contact: "మీరు మమ్మల్నిసంప్రదించవచ్చు:\n📞 7981967007\n💬 వాట్సాప్: 7981967007\n📧 smaginteriors@gmail.com",
+        process: "మా ప్రక్రియ సరళమైనది:\n1. ఉచిత పరామర్శ\n2. సైట్ కొలత\n3. 3D డిజైన్\n4. సామగ్రి ఎంపిక\n5. ఫ్యాక్టరీ తయారీ\n6. వృత్తిపరమైన స్థాపన\n7. అందించిటి మరియు సపోర్ట్",
+        default: "మీ సందేశానికి ధన్యవాదాలు! నేను సహాయం చేయగలను:\n• ధర మరియు ప్యాకేజీలు\n• మా సేవలు\n• పరామర్శ బుకింగ్\n• సంపర్క సమాచారం\n• మా ప్రక్రియ\n\nలేదా వ్యక్తిగత సపోర్ట్ కోసం మా టీమ్‌కు కనెక్ట్ చేయండి.",
+        connectAgent: "మీరు మా సపోర్ట్ టీమ్‌కు కనెక్ట్ చేయకూడదనుకుంటున్నారా?",
+        agentConnected: "మీకు మా సపోర్ట్ టీమ్‌కు కనెక్ట్ చేస్తున్నాము...",
+        agentStatus: "ఏజెంట్ సక్రియ"
+      }
+    };
+
+    function getAIResponse(message) {
+      const lang = localStorage.getItem('selectedLanguage') || 'en';
+      const responses = aiResponses[lang];
+      const msg = message.toLowerCase();
+
+      if (msg.includes('price') || msg.includes('cost') || msg.includes('भाव') || msg.includes('ధర')) {
+        return responses.pricing;
+      } else if (msg.includes('consult') || msg.includes('free') || msg.includes('परामर्श') || msg.includes('సంపర్క')) {
+        return responses.consultation;
+      } else if (msg.includes('service') || msg.includes('offer') || msg.includes('सेवा') || msg.includes('సేవ')) {
+        return responses.services;
+      } else if (msg.includes('warrant') || msg.includes('guarantee') || msg.includes('वारंटी') || msg.includes('వారెంటీ')) {
+        return responses.warranty;
+      } else if (msg.includes('contact') || msg.includes('call') || msg.includes('phone') || msg.includes('संपर्क') || msg.includes('కాల్')) {
+        return responses.contact;
+      } else if (msg.includes('process') || msg.includes('how') || msg.includes('प्रक्रिया') || msg.includes('ప్రక్రియ')) {
+        return responses.process;
+      } else if (msg.includes('hi') || msg.includes('hello') || msg.includes('नमस्ते') || msg.includes('హలో')) {
+        return responses.greeting;
+      }
+      
+      return responses.default;
+    }
+
+    function addMessage(text, isUser = false) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `chat-message ${isUser ? 'message-user' : 'message-bot'}`;
+      
+      const avatar = document.createElement('div');
+      avatar.className = 'message-avatar';
+      avatar.textContent = isUser ? '👤' : '🤖';
+      
+      const bubble = document.createElement('div');
+      bubble.className = 'message-bubble';
+      bubble.textContent = text;
+      
+      messageDiv.appendChild(avatar);
+      messageDiv.appendChild(bubble);
+      chatMessages.appendChild(messageDiv);
+      
+      // Scroll to bottom
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function addConnectAgentButtons() {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'chat-message message-bot';
+      
+      const avatar = document.createElement('div');
+      avatar.className = 'message-avatar';
+      avatar.textContent = '🤖';
+      
+      const bubble = document.createElement('div');
+      bubble.className = 'message-bubble';
+      const lang = localStorage.getItem('selectedLanguage') || 'en';
+      bubble.innerHTML = `
+        ${aiResponses[lang].connectAgent}
+        <div class="connect-agent">
+          <button class="agent-btn" onclick="connectWhatsapp()">WhatsApp</button>
+          <button class="agent-btn" onclick="connectPhone()">Call</button>
+        </div>
+      `;
+      
+      messageDiv.appendChild(avatar);
+      messageDiv.appendChild(bubble);
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function sendMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      addMessage(text, true);
+      chatInput.value = '';
+
+      // Simulate agent thinking
+      setTimeout(() => {
+        const response = getAIResponse(text);
+        addMessage(response, false);
+        
+        // Offer to connect after 2 messages
+        if (chatHistory.length >= 3) {
+          setTimeout(() => {
+            addConnectAgentButtons();
+          }, 1000);
+        }
+        
+        chatHistory.push({ user: text, bot: response });
+      }, 600);
+    }
+
+    function toggleChat() {
+      chatWidget.classList.toggle('active');
+      chatToggle.classList.toggle('active');
+      
+      if (chatWidget.classList.contains('active') && chatMessages.children.length === 0) {
+        const lang = localStorage.getItem('selectedLanguage') || 'en';
+        addMessage(aiResponses[lang].greeting, false);
+      }
+    }
+
+    function connectWhatsapp() {
+      window.open('https://wa.me/917981967007?text=Hello%20SMAG%20Interiors%2C%20I%20need%20support.', '_blank');
+    }
+
+    function connectPhone() {
+      window.location.href = 'tel:+917981967007';
+    }
+
+    // Event listeners
+    chatToggle.addEventListener('click', toggleChat);
+    chatClose.addEventListener('click', toggleChat);
+    chatSend.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    // Update chat language when language changes
+    const originalSetLanguage = window.setLanguage;
+    window.setLanguage = function(lang) {
+      if (originalSetLanguage) originalSetLanguage(lang);
+      currentLanguage = lang;
+      const responses = aiResponses[lang];
+      if (responses) {
+        chatTitle.textContent = lang === 'en' ? 'SMAG Support' : (lang === 'hi' ? 'SMAG सहायता' : 'SMAG సపోర్ట్');
+        chatStatus.textContent = responses.agentStatus;
+      }
+    };
+
     const homeType = document.querySelector("#homeType");
     const estimate = document.querySelector("#estimate");
     const checks = [...document.querySelectorAll(".controls input[type='checkbox']")];
@@ -2694,6 +2916,11 @@
     const sampleSwipe = document.querySelector("#sampleSwipe");
     const sampleRange = document.querySelector("#sampleRange");
     const revealItems = [...document.querySelectorAll(".intro-reveal")];
+
+    // Currency formatter
+    const money = {
+      format: (num) => num.toFixed(1)
+    };
     const buildStages = [
       {
         className: "stage-empty",
