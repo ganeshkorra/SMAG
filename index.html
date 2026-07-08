@@ -124,6 +124,37 @@
       gap: 10px;
     }
 
+    .language-selector {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .lang-btn {
+      min-height: 40px;
+      min-width: 45px;
+      border: 1px solid rgba(201, 161, 92, .4);
+      border-radius: 6px;
+      background: rgba(5, 5, 5, .6);
+      color: rgba(244, 238, 228, .7);
+      font: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .3s ease;
+    }
+
+    .lang-btn:hover {
+      border-color: rgba(201, 161, 92, .7);
+      color: var(--gold);
+    }
+
+    .lang-btn.active {
+      border-color: var(--gold);
+      background: rgba(201, 161, 92, .2);
+      color: var(--gold);
+    }
+
     .nav-cta,
     .button {
       display: inline-flex;
@@ -1156,6 +1187,258 @@
       border-color: rgba(78, 224, 123, .56);
     }
 
+    .chat-widget {
+      position: fixed;
+      right: 18px;
+      bottom: 120px;
+      z-index: 32;
+      display: flex;
+      flex-direction: column;
+      width: 380px;
+      max-height: 600px;
+      border: 1px solid rgba(201, 161, 92, .36);
+      border-radius: 12px;
+      background: rgba(12, 11, 10, .95);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 25px 80px rgba(0,0,0,.5);
+      opacity: 0;
+      transform: translateY(20px) scale(.9);
+      pointer-events: none;
+      transition: all .3s ease;
+    }
+
+    .chat-widget.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: all;
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px;
+      border-bottom: 1px solid rgba(201, 161, 92, .2);
+    }
+
+    .chat-header-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .chat-header-title strong {
+      font-family: Manrope, sans-serif;
+      font-size: 14px;
+      color: var(--warm);
+    }
+
+    .chat-header-title span {
+      font-size: 11px;
+      color: rgba(244, 238, 228, .6);
+    }
+
+    .chat-header-status {
+      width: 8px;
+      height: 8px;
+      background: #4ee07b;
+      border-radius: 99px;
+      box-shadow: 0 0 8px rgba(78, 224, 123, .6);
+    }
+
+    .chat-close {
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(201, 161, 92, .3);
+      background: rgba(201, 161, 92, .1);
+      color: var(--warm);
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all .2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-close:hover {
+      border-color: rgba(201, 161, 92, .6);
+      background: rgba(201, 161, 92, .2);
+    }
+
+    .chat-messages {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 16px;
+      overflow-y: auto;
+      flex-grow: 1;
+      max-height: 420px;
+    }
+
+    .chat-message {
+      display: flex;
+      gap: 8px;
+      animation: slideIn .3s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message-user {
+      flex-direction: row-reverse;
+    }
+
+    .message-bot {
+      flex-direction: row;
+    }
+
+    .message-bubble {
+      max-width: 280px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+
+    .message-user .message-bubble {
+      background: linear-gradient(135deg, #e1bf79, #9d7339);
+      color: #120d08;
+      font-weight: 600;
+    }
+
+    .message-bot .message-bubble {
+      background: rgba(255, 255, 255, .08);
+      color: rgba(244, 238, 228, .85);
+      border: 1px solid rgba(201, 161, 92, .2);
+    }
+
+    .message-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .message-user .message-avatar {
+      background: rgba(201, 161, 92, .2);
+      color: var(--gold);
+    }
+
+    .message-bot .message-avatar {
+      background: rgba(78, 224, 123, .2);
+      color: #4ee07b;
+    }
+
+    .chat-footer {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      border-top: 1px solid rgba(201, 161, 92, .2);
+    }
+
+    .chat-input {
+      flex: 1;
+      height: 40px;
+      border: 1px solid rgba(201, 161, 92, .3);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, .05);
+      color: var(--warm);
+      padding: 0 12px;
+      font-size: 13px;
+      font: inherit;
+      transition: border-color .2s ease;
+    }
+
+    .chat-input:focus {
+      outline: none;
+      border-color: rgba(201, 161, 92, .6);
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .chat-send {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(201, 161, 92, .5);
+      border-radius: 6px;
+      background: linear-gradient(135deg, rgba(201, 161, 92, .3), rgba(201, 161, 92, .1));
+      color: var(--gold);
+      font-size: 16px;
+      cursor: pointer;
+      transition: all .2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-send:hover {
+      background: linear-gradient(135deg, rgba(201, 161, 92, .5), rgba(201, 161, 92, .2));
+      border-color: var(--gold);
+    }
+
+    .chat-toggle {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 32;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4ee07b, #13984a);
+      border: 2px solid rgba(78, 224, 123, .6);
+      color: #041208;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 40px rgba(78, 224, 123, .25);
+      transition: all .3s ease;
+    }
+
+    .chat-toggle:hover {
+      transform: scale(1.08);
+      box-shadow: 0 16px 50px rgba(78, 224, 123, .35);
+    }
+
+    .chat-toggle.active {
+      background: linear-gradient(135deg, #e1bf79, #9d7339);
+      border-color: rgba(201, 161, 92, .6);
+      color: #120d08;
+    }
+
+    .connect-agent {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .agent-btn {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid rgba(201, 161, 92, .3);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, .05);
+      color: rgba(244, 238, 228, .8);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+
+    .agent-btn:hover {
+      background: rgba(201, 161, 92, .2);
+      border-color: rgba(201, 161, 92, .6);
+      color: var(--gold);
+    }
+
     @media (max-width: 900px) {
       .nav-links {
         display: none;
@@ -1163,6 +1446,10 @@
 
       .brand span {
         display: none;
+      }
+      
+      .language-selector {
+        margin-right: auto;
       }
 
       .stats,
@@ -1291,6 +1578,11 @@
         <a href="#contact">Contact</a>
       </div>
       <div class="nav-actions">
+        <div class="language-selector">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="hi">HI</button>
+          <button class="lang-btn" data-lang="te">TE</button>
+        </div>
         <a class="nav-cta whatsapp" href="https://wa.me/917981967007?text=Hello%20SMAG%20Interiors%2C%20I%20want%20a%20free%20interior%20consultation." target="_blank" rel="noreferrer">WhatsApp</a>
         <a class="nav-cta" href="tel:+917981967007">Call</a>
       </div>
@@ -1591,6 +1883,24 @@
     </section>
   </main>
 
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-header">
+      <div class="chat-header-title">
+        <strong id="chatTitle">SMAG Support</strong>
+        <span id="chatStatus">AI Agent Active</span>
+      </div>
+      <div class="chat-header-status"></div>
+      <button class="chat-close" id="chatClose">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-footer">
+      <input class="chat-input" id="chatInput" type="text" placeholder="Type your message..." autocomplete="off">
+      <button class="chat-send" id="chatSend">→</button>
+    </div>
+  </div>
+
+  <button class="chat-toggle" id="chatToggle">💬</button>
+
   <aside class="floating-quote" aria-label="Quick quote">
     <strong>Quick Interior Estimate</strong>
     <select id="quickType">
@@ -1616,6 +1926,760 @@
   </footer>
 
   <script>
+    // Translation Dictionary
+    const translations = {
+      en: {
+        // Navigation
+        navSpaces: "Spaces",
+        navBuild: "Build Journey",
+        navPackages: "Packages",
+        navSample: "Sample",
+        navMaterials: "Materials",
+        navEstimate: "Estimate",
+        navContact: "Contact",
+        navWhatsapp: "WhatsApp",
+        navCall: "Call",
+        
+        // Hero Section
+        heroEyebrow: "Premium Interior Design | Modular Kitchens | Complete Homes",
+        heroTitle: "Luxury Interiors Crafted Around Your Life.",
+        heroCopy: "SMAG Interiors designs homes that feel considered from the first sketch to the final handover: refined living rooms, precise modular kitchens, warm bedrooms, pooja units, wardrobes and full-home transformations.",
+        heroBtn1: "Get Free Consultation",
+        heroBtn2: "Explore Spaces",
+        
+        // Stats
+        statsHomes: "Homes envisioned",
+        statsYears: "Years of experience",
+        statsWarranty: "5 yr",
+        statsWarrantyText: "Warranty-led thinking",
+        statsFactory: "100%",
+        statsFactoryText: "Factory precision focus",
+        
+        // Highlights
+        chipKitchen: "Modular Kitchen",
+        chipWardrobes: "Luxury Wardrobes",
+        chipTV: "TV Unit + Panels",
+        chipPooja: "Pooja + Ceiling",
+        
+        // Rooms Section
+        roomsEyebrow: "Walk Through The Home",
+        roomsTitle: "Every room earns its mood.",
+        roomsLead: "The page is shaped like a luxury home tour: each section moves from emotion to function, so families can imagine the space before asking for a quote.",
+        roomsLiving: "Living Rooms",
+        roomsLivingDesc: "TV units, wall panels, false ceilings, glass partitions and ambient lighting built as one composition.",
+        roomsKitchen: "Modular Kitchens",
+        roomsKitchenDesc: "Soft-close hardware, intelligent storage, durable surfaces and a daily workflow that feels effortless.",
+        roomsBedroom: "Bedrooms",
+        roomsBedroomDesc: "Wardrobes, headboards, dressing units and hidden lighting tuned for calm, privacy and warmth.",
+        
+        // Materials Section
+        materialsEyebrow: "Materials You Can Trust",
+        materialsTitle: "Luxury is felt at the edges.",
+        materialsLead: "Premium interiors are made in the small decisions: how a drawer closes, how a laminate catches light, how wood, glass and stone behave together.",
+        materialWalnut: "Walnut Finish",
+        materialWalnutDesc: "Warm panels and wardrobes",
+        materialStone: "Stone Tops",
+        materialStoneDesc: "Kitchen and vanity surfaces",
+        materialGlass: "Glass",
+        materialGlassDesc: "Partitions and shutters",
+        materialBlack: "Matte Black",
+        materialBlackDesc: "Hardware and accents",
+        materialGold: "Brushed Gold",
+        materialGoldDesc: "Profiles and details",
+        
+        // Process Section
+        processEyebrow: "SMAG Process",
+        processTitle: "From first visit to handover.",
+        processStep1: "Consultation",
+        processStep2: "Site Measurement",
+        processStep3: "3D Design",
+        processStep4: "Material Selection",
+        processStep5: "Factory Manufacturing",
+        processStep6: "Installation",
+        processStep7: "Handover",
+        
+        // Build Section
+        buildEyebrow: "How We Build Luxury",
+        buildTitle: "Watch an empty room become a finished home.",
+        buildLead: "Instead of only showing final photos, this walkthrough reveals the craft behind the finish: measurement, structure, woodwork, lighting and final styling.",
+        buildInteractive: "Interactive Walkthrough",
+        buildEmpty: "Empty Site",
+        buildEmptyDesc: "The visit starts with a bare room, precise measurements and a clear design plan before any material is installed.",
+        buildFramework: "Framework",
+        buildFrameworkDesc: "Wall levels, ceiling lines and service points are marked so every cabinet, panel and light lands exactly where it should.",
+        buildWoodwork: "Woodwork",
+        buildWoodworkDesc: "Factory-cut shutters, wardrobes, TV units and storage modules come together with clean edges and durable hardware.",
+        buildLighting: "Lighting",
+        buildLightingDesc: "False ceiling details, profile lights and warm highlights are tuned to create the premium evening mood customers remember.",
+        buildFinish: "Luxury Finish",
+        buildFinishDesc: "The final styling brings materials, reflections, furniture and lighting into one completed luxury interior experience.",
+        
+        // Pricing Section
+        pricingEyebrow: "Our Packages",
+        pricingTitle: "Full modular interiors for every home.",
+        pricingLead: "Complete interior solutions with modular kitchens, wardrobes, TV units, false ceilings, lighting and 10-year warranty included.",
+        priceComplete: "Complete Interior",
+        pricingFeatures: ["Modular Kitchen", "Wardrobes", "TV Unit", "False Ceiling", "Lights & Electricals", "Premium Finishes", "Design & 3D View", "10 Years Warranty"],
+        priceBookNow: "Book Now",
+        
+        // Planner Section
+        plannerEyebrow: "Instant Direction",
+        plannerTitle: "Customize your estimate.",
+        plannerLead: "Add or remove features to get a personalized quote for your home. Mix and match to find your perfect interior solution.",
+        plannerHomeType: "Home Type",
+        planner2BHK: "2BHK Apartment",
+        planner3BHK: "3BHK Apartment",
+        planner4BHK: "4BHK Apartment",
+        plannerVilla: "Villa",
+        plannerTV: "TV Unit",
+        plannerKitchen: "Modular Kitchen",
+        plannerWardrobe: "Wardrobes",
+        plannerLighting: "False Ceiling",
+        plannerEstimate: "Friendly budget starting range",
+        plannerBook: "Book on WhatsApp",
+        
+        // Sample Section
+        sampleEyebrow: "Swipe The Sample",
+        sampleTitle: "Basic room to luxury interior.",
+        sampleLead: "Customers can drag the slider to compare a simple room with a premium SMAG-style finish, helping them feel the transformation before they call.",
+        sampleBasic: "Basic",
+        sampleLuxury: "Luxury",
+        sampleSwipe: "Swipe to compare the finish",
+        
+        // Before/After
+        beforeAfterEyebrow: "Before / After Thinking",
+        beforeAfterTitle: "Not renovation. Transformation.",
+        beforeAfterCopy: "A dated room becomes a finished lifestyle when design, material, lighting and execution move together.",
+        
+        // Reviews Section
+        reviewsEyebrow: "Trust Markers",
+        reviewsTitle: "Designed for families, not portfolios.",
+        reviewsLead: "Use this section later for real customer videos from completed homes. For now it frames the promise customers are buying.",
+        review1: "\"The design felt premium, but the biggest relief was having one team handle everything from measurements to installation.\"",
+        review1Author: "Apartment Owner",
+        review1City: "Hyderabad",
+        review2: "\"Our kitchen storage finally works for our daily routine. The finish made the entire home feel new.\"",
+        review2Author: "3BHK Client",
+        review2City: "Narapally",
+        review3: "\"They helped us choose materials that looked rich and stayed practical for a family home.\"",
+        review3Author: "Villa Client",
+        review3City: "East Hyderabad",
+        
+        // Final Section
+        finalEyebrow: "SMAG Interiors, Narapally",
+        finalTitle: "Let's build the home you'll never want to leave.",
+        finalCopy: "Book a free consultation for premium interiors, modular kitchens, luxury bedrooms, wardrobes, pooja units and complete home solutions in Hyderabad.",
+        contactWhatsapp: "WhatsApp 7981967007",
+        contactCall: "Call 7981967007",
+        contactEmail: "Email",
+        finalChat: "Chat on WhatsApp",
+        finalCall: "Call Now",
+        finalJustdial: "View Justdial Listing",
+        
+        // Footer
+        footerDesc: "Premium interior design and complete home solutions in Narapally, Hyderabad.",
+        footerContact: "Contact",
+        footerChatWhatsapp: "Chat on WhatsApp",
+        footerServices: "Services",
+        footerServicesList: "Modular kitchens, TV units, wardrobes, bedrooms, pooja rooms, false ceilings and full-home interiors.",
+        
+        // Floating Quote
+        floatingQuote: "Quick Interior Estimate",
+        floatingEstimate: "WhatsApp Estimate",
+        
+        // Build Stage Labels
+        buildSiteLabel: "Empty Site",
+        buildMeasureLabel: "Measurement + Marking",
+        buildFactoryLabel: "Factory Woodwork",
+        buildFinishLabel: "Finished Luxury Interior"
+      },
+      
+      hi: {
+        navSpaces: "स्पेस",
+        navBuild: "निर्माण यात्रा",
+        navPackages: "पैकेज",
+        navSample: "नमूना",
+        navMaterials: "सामग्री",
+        navEstimate: "अनुमान",
+        navContact: "संपर्क",
+        navWhatsapp: "व्हाट्सऐप",
+        navCall: "कॉल",
+        
+        heroEyebrow: "प्रीमियम इंटीरियर डिजाइन | मॉड्यूलर रसोई | पूर्ण घर",
+        heroTitle: "आपके जीवन के चारों ओर डिज़ाइन किए गए विलासवान इंटीरियर।",
+        heroCopy: "SMAG इंटीरियर्स ऐसे घर डिज़ाइन करता है जो पहले स्केच से लेकर अंतिम हस्तांतरण तक विचारशील हों: परिष्कृत रहने वाले कमरे, सटीक मॉड्यूलर रसोई, गर्म बेडरूम, पूजा इकाइयाँ, अलमारी और पूर्ण-घर रूपांतरण।",
+        heroBtn1: "मुफ़्त परामर्श प्राप्त करें",
+        heroBtn2: "स्पेस खोजें",
+        
+        statsHomes: "घर डिज़ाइन किए",
+        statsYears: "अनुभव के वर्ष",
+        statsWarranty: "5 वर्ष",
+        statsWarrantyText: "वारंटी-नेतृत्व सोच",
+        statsFactory: "100%",
+        statsFactoryText: "कारखाना सटीकता फोकस",
+        
+        chipKitchen: "मॉड्यूलर रसोई",
+        chipWardrobes: "विलासवान अलमारी",
+        chipTV: "टीवी यूनिट + पैनल",
+        chipPooja: "पूजा + छत",
+        
+        roomsEyebrow: "घर के माध्यम से चलें",
+        roomsTitle: "हर कमरा अपना मूड अर्जित करता है।",
+        roomsLead: "पृष्ठ एक विलासवान घर दौरे की तरह आकार दिया गया है: प्रत्येक अनुभाग भावना से कार्य में चलता है, इसलिए परिवार उद्धरण माँगने से पहले स्पेस की कल्पना कर सकते हैं।",
+        roomsLiving: "रहने वाले कमरे",
+        roomsLivingDesc: "टीवी यूनिट, दीवार पैनल, झूठी छतें, कांच विभाजन और परिवेश प्रकाश एक रचना के रूप में बनाया गया।",
+        roomsKitchen: "मॉड्यूलर रसोई",
+        roomsKitchenDesc: "सॉफ्ट-क्लोज़ हार्डवेयर, बुद्धिमान भंडारण, टिकाऊ सतहें और एक दैनिक वर्कफ़्लो जो सहज लगता है।",
+        roomsBedroom: "बेडरूम",
+        roomsBedroomDesc: "अलमारी, हेडबोर्ड, ड्रेसिंग यूनिट और शांति, गोपनीयता और गर्मी के लिए ट्यून की गई छिपी प्रकाश।",
+        
+        materialsEyebrow: "सामग्री जिस पर आप भरोसा कर सकते हैं",
+        materialsTitle: "विलास किनारों पर महसूस होता है।",
+        materialsLead: "प्रीमियम इंटीरियर छोटे निर्णयों में बनाए जाते हैं: एक दराज कैसे बंद होता है, एक लैमिनेट कैसे प्रकाश पकड़ता है, लकड़ी, कांच और पत्थर एक साथ कैसे व्यवहार करते हैं।",
+        materialWalnut: "अखरोट फिनिश",
+        materialWalnutDesc: "गर्म पैनल और अलमारी",
+        materialStone: "पत्थर शीर्ष",
+        materialStoneDesc: "रसोई और बेसिन की सतहें",
+        materialGlass: "कांच",
+        materialGlassDesc: "विभाजन और शटर",
+        materialBlack: "मैट ब्लैक",
+        materialBlackDesc: "हार्डवेयर और उच्चार",
+        materialGold: "ब्रश किया हुआ सोना",
+        materialGoldDesc: "प्रोफाइल और विवरण",
+        
+        processEyebrow: "SMAG प्रक्रिया",
+        processTitle: "पहली यात्रा से हस्तांतरण तक।",
+        processStep1: "परामर्श",
+        processStep2: "साइट माप",
+        processStep3: "3D डिजाइन",
+        processStep4: "सामग्री चयन",
+        processStep5: "कारखाना विनिर्माण",
+        processStep6: "स्थापना",
+        processStep7: "हस्तांतरण",
+        
+        buildEyebrow: "हम विलास कैसे बनाते हैं",
+        buildTitle: "खाली कमरे को पूर्ण घर में बदलते हुए देखें।",
+        buildLead: "केवल अंतिम फ़ोटो दिखाने के बजाय, यह वॉकथ्रू फिनिश के पीछे की कारीगरी को प्रकट करता है: माप, संरचना, लकड़ी का काम, प्रकाश और अंतिम स्टाइलिंग।",
+        buildInteractive: "इंटरैक्टिव वॉकथ्रू",
+        buildEmpty: "खाली साइट",
+        buildEmptyDesc: "यह यात्रा एक नंगे कमरे के साथ शुरू होती है, सटीक माप और किसी भी सामग्री स्थापित करने से पहले एक स्पष्ट डिजाइन योजना।",
+        buildFramework: "फ्रेमवर्क",
+        buildFrameworkDesc: "दीवार के स्तर, छत की रेखाएँ और सेवा बिंदु चिह्नित होते हैं ताकि हर कैबिनेट, पैनल और प्रकाश बिल्कुल जहाँ होना चाहिए।",
+        buildWoodwork: "लकड़ी का काम",
+        buildWoodworkDesc: "कारखाने-कट शटर, अलमारी, टीवी यूनिट और भंडारण मॉड्यूल साफ किनारों और टिकाऊ हार्डवेयर के साथ एक साथ आते हैं।",
+        buildLighting: "प्रकाश",
+        buildLightingDesc: "झूठी छत विवरण, प्रोफाइल लाइटें और गर्म हाइलाइट्स ग्राहकों को याद रहने वाली प्रीमियम शाम मनोदशा बनाने के लिए ट्यून किए गए हैं।",
+        buildFinish: "विलासवान फिनिश",
+        buildFinishDesc: "अंतिम स्टाइलिंग सामग्री, प्रतिबिंब, फर्नीचर और प्रकाश को एक पूर्ण विलासवान इंटीरियर अनुभव में लाता है।",
+        
+        pricingEyebrow: "हमारे पैकेज",
+        pricingTitle: "हर घर के लिए पूर्ण मॉड्यूलर इंटीरियर।",
+        pricingLead: "मॉड्यूलर रसोई, अलमारी, टीवी यूनिट, झूठी छतें, प्रकाश और 10 साल की वारंटी के साथ पूर्ण इंटीरियर समाधान।",
+        priceComplete: "संपूर्ण इंटीरियर",
+        pricingFeatures: ["मॉड्यूलर रसोई", "अलमारी", "टीवी यूनिट", "झूठी छत", "रोशनी और विद्युत", "प्रीमियम फिनिश", "डिजाइन और 3D व्यू", "10 साल की वारंटी"],
+        priceBookNow: "अभी बुक करें",
+        
+        plannerEyebrow: "तत्काल दिशा",
+        plannerTitle: "अपने अनुमान को कस्टमाइज़ करें।",
+        plannerLead: "अपने घर के लिए व्यक्तिगत उद्धरण प्राप्त करने के लिए फीचर जोड़ें या हटाएं। अपना परफेक्ट इंटीरियर समाधान खोजने के लिए मिक्स और मैच करें।",
+        plannerHomeType: "घर का प्रकार",
+        planner2BHK: "2BHK अपार्टमेंट",
+        planner3BHK: "3BHK अपार्टमेंट",
+        planner4BHK: "4BHK अपार्टमेंट",
+        plannerVilla: "विला",
+        plannerTV: "टीवी यूनिट",
+        plannerKitchen: "मॉड्यूलर रसोई",
+        plannerWardrobe: "अलमारी",
+        plannerLighting: "झूठी छत",
+        plannerEstimate: "अनुकूल बजट प्रारंभिक रेंज",
+        plannerBook: "व्हाट्सऐप पर बुक करें",
+        
+        sampleEyebrow: "नमूना स्वाइप करें",
+        sampleTitle: "बेसिक कमरे से विलासवान इंटीरियर।",
+        sampleLead: "ग्राहक एक साधारण कमरे को प्रीमियम SMAG-स्टाइल फिनिश के साथ तुलना करने के लिए स्लाइडर को ड्रैग कर सकते हैं, जो उन्हें कॉल करने से पहले परिवर्तन महसूस करने में मदद करता है।",
+        sampleBasic: "बेसिक",
+        sampleLuxury: "विलासवान",
+        sampleSwipe: "फिनिश की तुलना करने के लिए स्वाइप करें",
+        
+        beforeAfterEyebrow: "पहले / बाद की सोच",
+        beforeAfterTitle: "नवीकरण नहीं। परिवर्तन।",
+        beforeAfterCopy: "एक पुराना कमरा एक पूर्ण जीवनशैली बन जाता है जब डिजाइन, सामग्री, प्रकाश और निष्पादन एक साथ चलते हैं।",
+        
+        reviewsEyebrow: "विश्वास मार्कर",
+        reviewsTitle: "परिवारों के लिए डिज़ाइन किया गया, पोर्टफोलियो के लिए नहीं।",
+        reviewsLead: "पूर्ण घरों से वास्तविक ग्राहक वीडियो के लिए इस अनुभाग का बाद में उपयोग करें। अभी के लिए यह ग्राहकों को खरीद रहे वादे को फ्रेम करता है।",
+        review1: "\"डिजाइन प्रीमियम लगा, लेकिन सबसे बड़ी राहत माप से स्थापना तक सब कुछ संभालने वाली एक टीम थी।\"",
+        review1Author: "अपार्टमेंट मालिक",
+        review1City: "हैदराबाद",
+        review2: "\"हमारी रसोई भंडारण अब हमारी दैनिक दिनचर्या के लिए काम करती है। फिनिश ने पूरे घर को नया महसूस कराया।\"",
+        review2Author: "3BHK क्लाइंट",
+        review2City: "नारापल्ली",
+        review3: "\"उन्होंने हमें ऐसी सामग्री चुनने में मदद की जो समृद्ध दिखती थी और पारिवारिक घर के लिए व्यावहारिक बनी रही।\"",
+        review3Author: "विला क्लाइंट",
+        review3City: "पूर्व हैदराबाद",
+        
+        finalEyebrow: "SMAG इंटीरियर्स, नारापल्ली",
+        finalTitle: "चलिए ऐसा घर बनाते हैं जिसे आप कभी छोड़ना नहीं चाहेंगे।",
+        finalCopy: "हैदराबाद में प्रीमियम इंटीरियर, मॉड्यूलर रसोई, विलासवान बेडरूम, अलमारी, पूजा इकाइयों और पूर्ण घर समाधानों के लिए मुफ्त परामर्श बुक करें।",
+        contactWhatsapp: "व्हाट्सऐप 7981967007",
+        contactCall: "कॉल 7981967007",
+        contactEmail: "ईमेल",
+        finalChat: "व्हाट्सऐप पर चैट करें",
+        finalCall: "अभी कॉल करें",
+        finalJustdial: "जस्टडायल लिस्टिंग देखें",
+        
+        footerDesc: "नारापल्ली, हैदराबाद में प्रीमियम इंटीरियर डिजाइन और पूर्ण घर समाधान।",
+        footerContact: "संपर्क",
+        footerChatWhatsapp: "व्हाट्सऐप पर चैट करें",
+        footerServices: "सेवाएँ",
+        footerServicesList: "मॉड्यूलर रसोई, टीवी यूनिट, अलमारी, बेडरूम, पूजा कक्ष, झूठी छतें और पूर्ण-घर इंटीरियर।",
+        
+        floatingQuote: "त्वरित इंटीरियर अनुमान",
+        floatingEstimate: "व्हाट्सऐप अनुमान",
+        
+        buildSiteLabel: "खाली साइट",
+        buildMeasureLabel: "माप + चिह्नकन",
+        buildFactoryLabel: "कारखाना लकड़ी का काम",
+        buildFinishLabel: "पूर्ण विलासवान इंटीरियर"
+      },
+      
+      te: {
+        navSpaces: "స్పేసెస్",
+        navBuild: "నిర్మాణ ఆయాస",
+        navPackages: "ప్యాకేజీలు",
+        navSample: "నమూనా",
+        navMaterials: "సామగ్రి",
+        navEstimate: "అంచనా",
+        navContact: "సంప్రదించండి",
+        navWhatsapp: "వాట్సాప్",
+        navCall: "కాల్ చేయండి",
+        
+        heroEyebrow: "ప్రీమియం ఇంటీరియర్ డిజైన్ | మాడ్యులర్ రసోడు | పూర్తి హోమ్‌లు",
+        heroTitle: "మీ జీవితం చుట్టూ రూపొందించిన విలాసవంత ఇంటీరియర్‌లు.",
+        heroCopy: "SMAG ఇంటీరియర్‌లు మొదటి స్కెచ్ నుండి చివరి సంపాదనవరకు వికసించిన ఇళ్ళను డిజైన్ చేస్తుంది: సూక్ష్మమైన గదులు, ఖచ్చితమైన మాడ్యులర్ రసోడు, వెచ్చని침房, పూజా యూనిట్‌లు, అల్మారీలు మరియు పూర్తి-ఇంటి రూపాంతరణలు.",
+        heroBtn1: "ఉచిత సంప్రదింపు పొందండి",
+        heroBtn2: "స్పేసెస్ అన్వేషించండి",
+        
+        statsHomes: "ఇళ్ళు ఊహించిన",
+        statsYears: "అనుభవ సంవత్సరాలు",
+        statsWarranty: "5 సం.",
+        statsWarrantyText: "వారెంటీ-నేతృత్వ ఆలోచన",
+        statsFactory: "100%",
+        statsFactoryText: "ఫ్యాక్టరీ ఖచ్చితత్వ ఫోకస్",
+        
+        chipKitchen: "మాడ్యులర్ రసోడు",
+        chipWardrobes: "విలాసవంత అల్మారీలు",
+        chipTV: "టీవీ యూనిట్ + పానెళ్ళు",
+        chipPooja: "పూజా + ఛాయం",
+        
+        roomsEyebrow: "ఇంటిలో నడిచిపోండి",
+        roomsTitle: "ప్రతి గది దాని మానసిక స్థితిని సంపాదించుకుంటుంది.",
+        roomsLead: "పేజీ విలాసవంత ఇంటి పర్యటన వలె రూపుకుందైనది: ప్రతి విభాగం భావన నుండి ఫంక్షన్‌కు కదులుతుంది, కాబట్టి కుటుంబాలు ఉల్లేఖనం కోరిక ముందు స్థలాన్ని ఊహించుకోవచ్చు.",
+        roomsLiving: "జీవన గదులు",
+        roomsLivingDesc: "టీవీ యూనిట్‌లు, గోడ పానెళ్ళు, తప్పుడు ఛాయంలు, గాజు విభజనలు మరియు పరిసర కాంతి ఒక కూర్పుగా నిర్మించబడ్డాయి.",
+        roomsKitchen: "మాడ్యులర్ రసోడు",
+        roomsKitchenDesc: "సాఫ్ట్-క్లోజ్ హార్డ్‌వేర్, తెలివైన నిల్వ, టికाऊ సంఘటనలు మరియు సహజంగా అనిపించే రోజువారీ వర్క్‌ఫ్లో.",
+        roomsBedroom: "침दान్",
+        roomsBedroomDesc: "అల్మారీలు, హెడ్‌బోర్డ్‌లు, డ్రెసింగ్ యూనిట్‌లు మరియు ప్రశాంతత, గోప్యతా మరియు ఉష్ణత కోసం ట్యూన్ చేసిన దాచిన కాంతి.",
+        
+        materialsEyebrow: "మీరు విశ్వాస చేయగలిగిన సామగ్రి",
+        materialsTitle: "విలాస అంచులలో అనుభూతి చెందుతుంది.",
+        materialsLead: "ప్రీమియం ఇంటీరియర్‌లు చిన్న నిర్ణయాలలో తయారు చేయబడతాయి: డ్రాయర్ ఎలా మూసుకుంటుంది, లామినేట్ కాంతిని ఎలా చేరుకుంటుంది, కలప, గాజు మరియు రాయి కలిసి ఎలా ప్రవర్తిస్తాయి.",
+        materialWalnut: "వాల్‌నట్ ఫిన్‌ష్",
+        materialWalnutDesc: "ఈర్ర పానెళ్ళు మరియు అల్మారీలు",
+        materialStone: "రాయి టాప్‌లు",
+        materialStoneDesc: "వంటగది మరియు సింక్ ఉపరితలాలు",
+        materialGlass: "గాజు",
+        materialGlassDesc: "విభజనలు మరియు షట్టర్‌లు",
+        materialBlack: "మ్యాట్ బ్లాక్",
+        materialBlackDesc: "హార్డ్‌వేర్ మరియు ఉచ్చారణ",
+        materialGold: "బ్రష్ చేసిన గోల్డ్",
+        materialGoldDesc: "ప్రొఫైళ్ళు మరియు వివరాలు",
+        
+        processEyebrow: "SMAG ప్రక్రియ",
+        processTitle: "మొదటి సందర్శన నుండి అందించిటి వరకు.",
+        processStep1: "సంప్రదింపు",
+        processStep2: "సైట్ కొలత",
+        processStep3: "3D డిజైన్",
+        processStep4: "సామగ్రి ఎంపిక",
+        processStep5: "ఫ్యాక్టరీ తయారీ",
+        processStep6: "ఇన్‌స్టాలేషన్",
+        processStep7: "ఆందోళన",
+        
+        buildEyebrow: "మేము విలాసవంతమైనది ఎలా నిర్మిస్తాము",
+        buildTitle: "ఖాళీ గది ఎలా పూర్తి ఇంటిగా మారుతుందో చూడండి.",
+        buildLead: "చివరి ఫోటోలను చూపించే బదులు, ఈ నడకన ఫిన్‌ష్ వెనుక చేతిపని ను బహిర్గతం చేస్తుంది: కొలత, నిర్మాణం, కలప చేతిపని, కాంతి మరియు చివరి స్టైలింగ్.",
+        buildInteractive: "ఇంటరాక్టివ్ వాక్‌థ్రూ",
+        buildEmpty: "ఖాళీ సైట్",
+        buildEmptyDesc: "సందర్శన నగ్న గదితో ప్రారంభమవుతుంది, ఖచ్చితమైన కొలతలు మరియు ఏ సామగ్రీ ఇన్‌స్టాల్ చేయకముందే స్పష్టమైన డిజైన్ ప్రణాళిక.",
+        buildFramework: "ఫ్రేమ్‌వర్క్",
+        buildFrameworkDesc: "గోడ స్థాయిలు, ఛాయం రేఖలు మరియు సేవా పాయింట్‌లు గుర్తించబడతాయి కాబట్టి ప్రతి క్యాబినెట్, పానెల్ మరియు కాంతి ఎక్కడ ఉండాలో ఖచ్చితంగా ఉంటుంది.",
+        buildWoodwork: "కలప చేతిపని",
+        buildWoodworkDesc: "ఫ్యాక్టరీ-కట్ షట్టర్‌లు, అల్మారీలు, టీవీ యూనిట్‌లు మరియు నిల్వ మాడ్యూళ్ళు స్చేవ అంచులు మరియు మजबूत హార్డ్‌వేర్‌తో కూడిన వస్తాయి.",
+        buildLighting: "కాంతి",
+        buildLightingDesc: "తప్పుడు ఛాయం వివరాలు, ప్రొఫైల్ లైట్‌లు మరియు ఆఖరుల ఎత్తు లేదా విలాసవంత సాయంకాల మానసిక స్థితిని సృష్టించడానికి ట్యూన్ చేయబడ్డాయి.",
+        buildFinish: "విలాసవంత ఫిన్‌ష్",
+        buildFinishDesc: "తుది స్టైలింగ్ సామగ్రి, ప్రతిబింబాలు, ఫర్నిచర్ మరియు కాంతిని ఒక పూర్తి విలాసవంత ఇంటీరియర్ అనుభవంలో తీసుకువస్తుంది.",
+        
+        pricingEyebrow: "మా ప్యాకేజీలు",
+        pricingTitle: "ప్రతి ఇంటికి పూర్తి మాడ్యులర్ ఇంటీరియర్‌లు.",
+        pricingLead: "మాడ్యులర్ రసోడు, అల్మారీలు, టీవీ యూనిట్‌లు, తప్పుడు ఛాయంలు, కాంతి మరియు 10 సంవత్సర వారెంటీతో సంపూర్ణ ఇంటీరియర్ సమాధానాలు.",
+        priceComplete: "సంపూర్ణ ఇంటీరియర్",
+        pricingFeatures: ["మాడ్యులర్ రసోడు", "అల్మారీలు", "టీవీ యూనిట్", "తప్పుడు ఛాయం", "లైట్‌లు మరియు ఎలెక్ట్రికల్", "ప్రీమియం ఫిన్‌ష్", "డిజైన్ మరియు 3D వ్యూ", "10 సంవత్సర వారెంటీ"],
+        priceBookNow: "ఇప్పుడు బుక్ చేయండి",
+        
+        plannerEyebrow: "తక్షణ దిశ",
+        plannerTitle: "మీ అంచనాను కస్టమైజ్ చేయండి.",
+        plannerLead: "మీ ఇంటికి ব్యక్తిగతీకరించిన కోట్ పొందడానికి ఫీచర్‌లను జోడించండి లేదా తీసివేయండి. మీ పరిపూర్ణ ఇంటీరియర్ సమాధానాన్ని కనుగొనడానికి మిక్స్ మరియు మ్యాచ్ చేయండి.",
+        plannerHomeType: "ఇంట రకం",
+        planner2BHK: "2BHK అపార్టమెంట్",
+        planner3BHK: "3BHK అపార్టమెంట్",
+        planner4BHK: "4BHK అపార్టమెంట్",
+        plannerVilla: "విల్లా",
+        plannerTV: "టీవీ యూనిట్",
+        plannerKitchen: "మాడ్యులర్ రసోడు",
+        plannerWardrobe: "అల్మారీలు",
+        plannerLighting: "తప్పుడు ఛాయం",
+        plannerEstimate: "స్నేహపూర్వక బడ్జెట్ ప్రారంభ పరిధి",
+        plannerBook: "వాట్సాప్‌పై బుక్ చేయండి",
+        
+        sampleEyebrow: "నమూనా స్వాइప్ చేయండి",
+        sampleTitle: "ప్రాథమిక గది నుండి విలాసవంత ఇంటీరియర్.",
+        sampleLead: "నిమిషాలు సాధారణ గదిని ప్రీమియం SMAG-శైలీకృత ఫిన్‌ష్‌తో సరిపోల్చడానికి స్లైడర్‌ను కదిలించవచ్చు, కాల్ చేయకముందే రూపాంతరణను అనుభవించడంలో వాటికి సహాయం చేస్తుంది.",
+        sampleBasic: "ప్రాథమిక",
+        sampleLuxury: "విలాసవంత",
+        sampleSwipe: "ఫిన్‌ష్‌ను పోల్చడానికి స్వాइప్ చేయండి",
+        
+        beforeAfterEyebrow: "ముందు / తరువాత ఆలోచన",
+        beforeAfterTitle: "నవీకరణ కాదు. పరిణామం.",
+        beforeAfterCopy: "డిజైన్, సామగ్రి, కాంతి మరియు అమలు కలిసి కదిలిన సమయానికి పాతული గది పూర్తి జీవనశైలిగా మారుతుంది.",
+        
+        reviewsEyebrow: "విశ్వాస గుర్తులు",
+        reviewsTitle: "కుటుంబాలకు రూపొందించిన, పోర్ట్‌ఫోలియోలకు కాదు.",
+        reviewsLead: "సంపూర్ణ ఇళ్ల నుండి వాస్తవ గ్రాహక వీడియోల కోసం ఈ విభాగాన్ని తరువాత ఉపయోగించండి. ప్రస్తుతానికి ఇది గ్రాహకులు కొనుగోలు చేస్తున్న వాగ్దానాన్ని ఫ్రేమ్ చేస్తుంది.",
+        review1: "\"డిజైన్ ప్రీమియం లాగా భావించింది, కానీ అతిపెద్ద ఉపశమనం కొలత నుండి ఇన్‌స్టాలేషన్ వరకు సరిగ్గా నిర్వహించిన ఒక జట.",
+        review1Author: "అపార్టమెంట్ యజమాని",
+        review1City: "హైదరాబాద్",
+        review2: "\"మా రసోడు నిల్వ చివరకు మా రోజువారీ దినచర్యకు పనిచేస్తుంది. ఫిన్‌ష్ మొత్తం ఇంటిని నতుందిగా చేసింది.\"",
+        review2Author: "3BHK క్లయింట్",
+        review2City: "నారాపల్లి",
+        review3: "\"సమృద్ధిగా కనిపించిన సామగ్రిని ఎంచుకోవడంలో వారు మాకు సహాయం చేశారు మరియు ఒక కుటుంబ ఇంటికి ఆచరణీయంగా ఉంది.\"",
+        review3Author: "విల్లా క్లయింట్",
+        review3City: "తూర్పు హైదరాబాద్",
+        
+        finalEyebrow: "SMAG ఇంటీరియర్‌లు, నారాపల్లి",
+        finalTitle: "మీరు ఎప్పుడూ వదిలివేయకూడదని ఇంటిని నిర్మిద్దాం.",
+        finalCopy: "హైదరాబాద్‌లో ప్రీమియం ఇంటీరియర్‌లు, మాడ్యులర్ రసోడు, విలాసవంత침दान్లు, అల్మారీలు, పూజా యూనిట్‌లు మరియు పూర్తి-ఇంటి సమాధానాల కోసం ఉచిత సంప్రదింపును బుక్ చేయండి.",
+        contactWhatsapp: "వాట్సాప్ 7981967007",
+        contactCall: "కాల్ 7981967007",
+        contactEmail: "ఇమెయిల్",
+        finalChat: "వాట్సాప్‌పై చాట్ చేయండి",
+        finalCall: "ఇప్పుడు కాల్ చేయండి",
+        finalJustdial: "జస్టడియల్ జాబితాను చూడండి",
+        
+        footerDesc: "నారాపల్లి, హైదరాబాద్‌లో ప్రీమియం ఇంటీరియర్ డిజైన్ మరియు పూర్తి ఇంటి సమాధానాలు.",
+        footerContact: "సంప్రదించండి",
+        footerChatWhatsapp: "వాట్సాప్‌పై చాట్ చేయండి",
+        footerServices: "సేవలు",
+        footerServicesList: "మాడ్యులర్ రసోడు, టీవీ యూనిట్‌లు, అల్మారీలు,침दान్లు, పూజా గదులు, తప్పుడు ఛాయంలు మరియు పూర్తి-ఇంటి ఇంటీరియర్‌లు.",
+        
+        floatingQuote: "త్వరిత ఇంటీరియర్ అంచనా",
+        floatingEstimate: "వాట్సాప్ అంచనా",
+        
+        buildSiteLabel: "ఖాళీ సైట్",
+        buildMeasureLabel: "కొలత + గుర్తించడం",
+        buildFactoryLabel: "ఫ్యాక్టరీ కలప చేతిపని",
+        buildFinishLabel: "సంపూర్ణ విలాసవంత ఇంటీరియర్"
+      }
+    };
+
+    // Language switching function
+    function setLanguage(lang) {
+      localStorage.setItem('selectedLanguage', lang);
+      
+      // Update button states
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      
+      // Update all text content
+      updatePageContent(lang);
+    }
+
+    function updatePageContent(lang) {
+      const t = translations[lang];
+      
+      // Navigation
+      const navLinks = document.querySelectorAll('.nav-links a');
+      if (navLinks[0]) navLinks[0].textContent = t.navSpaces;
+      if (navLinks[1]) navLinks[1].textContent = t.navBuild;
+      if (navLinks[2]) navLinks[2].textContent = t.navPackages;
+      if (navLinks[3]) navLinks[3].textContent = t.navSample;
+      if (navLinks[4]) navLinks[4].textContent = t.navMaterials;
+      if (navLinks[5]) navLinks[5].textContent = t.navEstimate;
+      if (navLinks[6]) navLinks[6].textContent = t.navContact;
+      
+      // Update data attributes for dynamic content mapping
+      document.documentElement.setAttribute('lang', lang);
+      document.documentElement.setAttribute('data-lang', lang);
+      
+      // Hero section
+      updateText('.hero .eyebrow', t.heroEyebrow);
+      updateText('.hero h1', t.heroTitle);
+      updateText('.hero-copy', t.heroCopy);
+      updateText('.hero-actions .button', t.heroBtn1);
+      updateText('.hero-actions .button.secondary', t.heroBtn2);
+      
+      // Stats
+      const stats = document.querySelectorAll('.stat');
+      if (stats[1]) stats[1].querySelector('span').textContent = t.statsHomes;
+      if (stats[2]) stats[2].querySelector('span').textContent = t.statsYears;
+      if (stats[3]) stats[3].querySelector('span').textContent = t.statsWarrantyText;
+      if (stats[4]) stats[4].querySelector('span').textContent = t.statsFactoryText;
+      
+      // Highlights
+      const chips = document.querySelectorAll('.intro-chip');
+      if (chips[0]) chips[0].textContent = t.chipKitchen;
+      if (chips[1]) chips[1].textContent = t.chipWardrobes;
+      if (chips[2]) chips[2].textContent = t.chipTV;
+      if (chips[3]) chips[3].textContent = t.chipPooja;
+      
+      // Room section
+      const roomReveal = document.querySelector('.rooms .section-head.intro-reveal');
+      if (roomReveal) {
+        roomReveal.querySelector('.eyebrow').textContent = t.roomsEyebrow;
+        roomReveal.querySelector('h2').textContent = t.roomsTitle;
+        roomReveal.querySelector('.lead').textContent = t.roomsLead;
+      }
+      
+      const roomCards = document.querySelectorAll('.room-card');
+      if (roomCards[0]) {
+        roomCards[0].querySelector('h3').textContent = t.roomsLiving;
+        roomCards[0].querySelector('p').textContent = t.roomsLivingDesc;
+      }
+      if (roomCards[1]) {
+        roomCards[1].querySelector('h3').textContent = t.roomsKitchen;
+        roomCards[1].querySelector('p').textContent = t.roomsKitchenDesc;
+      }
+      if (roomCards[2]) {
+        roomCards[2].querySelector('h3').textContent = t.roomsBedroom;
+        roomCards[2].querySelector('p').textContent = t.roomsBedroomDesc;
+      }
+      
+      // Materials
+      const materialsReveal = document.querySelector('.materials .section-head.intro-reveal');
+      if (materialsReveal) {
+        materialsReveal.querySelector('.eyebrow').textContent = t.materialsEyebrow;
+        materialsReveal.querySelector('h2').textContent = t.materialsTitle;
+        materialsReveal.querySelector('.lead').textContent = t.materialsLead;
+      }
+      
+      const materials = document.querySelectorAll('.material');
+      if (materials[0]) {
+        materials[0].querySelector('strong').textContent = t.materialWalnut;
+        materials[0].querySelector('span').textContent = t.materialWalnutDesc;
+      }
+      if (materials[1]) {
+        materials[1].querySelector('strong').textContent = t.materialStone;
+        materials[1].querySelector('span').textContent = t.materialStoneDesc;
+      }
+      if (materials[2]) {
+        materials[2].querySelector('strong').textContent = t.materialGlass;
+        materials[2].querySelector('span').textContent = t.materialGlassDesc;
+      }
+      if (materials[3]) {
+        materials[3].querySelector('strong').textContent = t.materialBlack;
+        materials[3].querySelector('span').textContent = t.materialBlackDesc;
+      }
+      if (materials[4]) {
+        materials[4].querySelector('strong').textContent = t.materialGold;
+        materials[4].querySelector('span').textContent = t.materialGoldDesc;
+      }
+      
+      // Process
+      const processReveal = document.querySelector('.experience .intro-reveal');
+      if (processReveal) {
+        processReveal.querySelector('.eyebrow').textContent = t.processEyebrow;
+        processReveal.querySelector('h2').textContent = t.processTitle;
+      }
+      
+      const steps = document.querySelectorAll('.step');
+      if (steps[0]) steps[0].querySelector('strong').textContent = t.processStep1;
+      if (steps[1]) steps[1].querySelector('strong').textContent = t.processStep2;
+      if (steps[2]) steps[2].querySelector('strong').textContent = t.processStep3;
+      if (steps[3]) steps[3].querySelector('strong').textContent = t.processStep4;
+      if (steps[4]) steps[4].querySelector('strong').textContent = t.processStep5;
+      if (steps[5]) steps[5].querySelector('strong').textContent = t.processStep6;
+      if (steps[6]) steps[6].querySelector('strong').textContent = t.processStep7;
+      
+      // Build section
+      const buildReveal = document.querySelector('.build-story .section-head.intro-reveal');
+      if (buildReveal) {
+        buildReveal.querySelector('.eyebrow').textContent = t.buildEyebrow;
+        buildReveal.querySelector('h2').textContent = t.buildTitle;
+        buildReveal.querySelector('.lead').textContent = t.buildLead;
+      }
+      
+      updateText('.build-panel .eyebrow', t.buildInteractive);
+      updateText('#stageTitle', t.buildEmpty);
+      updateText('#stageNote', t.buildEmptyDesc);
+      
+      const stageButtons = document.querySelectorAll('.stage-button');
+      if (stageButtons[0]) stageButtons[0].textContent = '';
+      stageButtons.forEach((btn, idx) => {
+        const span = btn.querySelector('span');
+        if (span) {
+          span.textContent = String(idx + 1).padStart(2, '0');
+          const text = [t.buildEmpty, t.buildFramework, t.buildWoodwork, t.buildLighting, t.buildFinish][idx];
+          btn.innerHTML = `<span>${span.textContent}</span>${text}`;
+        }
+      });
+      
+      // Labels
+      document.querySelector('.label-site').textContent = t.buildSiteLabel;
+      document.querySelector('.label-measure').textContent = t.buildMeasureLabel;
+      document.querySelector('.label-factory').textContent = t.buildFactoryLabel;
+      document.querySelector('.label-finish').textContent = t.buildFinishLabel;
+      
+      // Pricing
+      const pricingReveal = document.querySelector('.pricing .section-head.intro-reveal');
+      if (pricingReveal) {
+        pricingReveal.querySelector('.eyebrow').textContent = t.pricingEyebrow;
+        pricingReveal.querySelector('h2').textContent = t.pricingTitle;
+        pricingReveal.querySelector('.lead').textContent = t.pricingLead;
+      }
+      
+      const priceCards = document.querySelectorAll('.price-card');
+      priceCards.forEach(card => {
+        card.querySelector('.price-label').textContent = t.priceComplete;
+        const features = card.querySelectorAll('.price-features li');
+        features.forEach((li, idx) => {
+          if (t.pricingFeatures[idx]) li.textContent = t.pricingFeatures[idx];
+        });
+        card.querySelector('.button').textContent = t.priceBookNow;
+      });
+      
+      // Planner
+      const plannerReveal = document.querySelector('.planner .section-head.intro-reveal');
+      if (plannerReveal) {
+        plannerReveal.querySelector('.eyebrow').textContent = t.plannerEyebrow;
+        plannerReveal.querySelector('h2').textContent = t.plannerTitle;
+        plannerReveal.querySelector('.lead').textContent = t.plannerLead;
+      }
+      
+      const homeTypeSelect = document.getElementById('homeType');
+      if (homeTypeSelect) {
+        homeTypeSelect.parentElement.textContent = t.plannerHomeType;
+        homeTypeSelect.parentElement.appendChild(homeTypeSelect);
+        const options = homeTypeSelect.querySelectorAll('option');
+        if (options[0]) options[0].textContent = t.planner2BHK;
+        if (options[1]) options[1].textContent = t.planner3BHK;
+        if (options[2]) options[2].textContent = t.planner4BHK;
+        if (options[3]) options[3].textContent = t.plannerVilla;
+      }
+      
+      const controls = document.querySelectorAll('.control-row label');
+      if (controls[0]) controls[0].textContent = t.plannerTV;
+      if (controls[1]) controls[1].textContent = t.plannerKitchen;
+      if (controls[2]) controls[2].textContent = t.plannerWardrobe;
+      if (controls[3]) controls[3].textContent = t.plannerLighting;
+      
+      const priceSpan = document.querySelector('.price span');
+      if (priceSpan) priceSpan.textContent = t.plannerEstimate;
+      
+      document.querySelector('.planner .button.whatsapp').textContent = t.plannerBook;
+      
+      // Sample
+      const sampleReveal = document.querySelector('.before-after #sample ~ .shell .section-head.intro-reveal') || document.querySelector('#sample .section-head.intro-reveal');
+      if (sampleReveal) {
+        sampleReveal.querySelector('.eyebrow').textContent = t.sampleEyebrow;
+        sampleReveal.querySelector('h2').textContent = t.sampleTitle;
+        sampleReveal.querySelector('.lead').textContent = t.sampleLead;
+      }
+      
+      const swipeLabels = document.querySelectorAll('.swipe-labels span');
+      if (swipeLabels[0]) swipeLabels[0].textContent = t.sampleBasic;
+      if (swipeLabels[1]) swipeLabels[1].textContent = t.sampleLuxury;
+      
+      updateText('.swipe-hint', t.sampleSwipe);
+      
+      // Before/After
+      const beforeAfterSection = document.querySelectorAll('.before-after .intro-reveal')[1];
+      if (beforeAfterSection) {
+        beforeAfterSection.querySelector('.eyebrow').textContent = t.beforeAfterEyebrow;
+        beforeAfterSection.querySelector('h2').textContent = t.beforeAfterTitle;
+        beforeAfterSection.querySelector('.hero-copy').textContent = t.beforeAfterCopy;
+      }
+      
+      // Reviews
+      const reviewsReveal = document.querySelector('.reviews .section-head.intro-reveal');
+      if (reviewsReveal) {
+        reviewsReveal.querySelector('.eyebrow').textContent = t.reviewsEyebrow;
+        reviewsReveal.querySelector('h2').textContent = t.reviewsTitle;
+        reviewsReveal.querySelector('.lead').textContent = t.reviewsLead;
+      }
+      
+      const reviews = document.querySelectorAll('.review');
+      if (reviews[0]) {
+        reviews[0].querySelector('p').textContent = t.review1;
+        reviews[0].querySelector('strong').textContent = t.review1Author;
+        reviews[0].querySelector('span').textContent = t.review1City;
+      }
+      if (reviews[1]) {
+        reviews[1].querySelector('p').textContent = t.review2;
+        reviews[1].querySelector('strong').textContent = t.review2Author;
+        reviews[1].querySelector('span').textContent = t.review2City;
+      }
+      if (reviews[2]) {
+        reviews[2].querySelector('p').textContent = t.review3;
+        reviews[2].querySelector('strong').textContent = t.review3Author;
+        reviews[2].querySelector('span').textContent = t.review3City;
+      }
+      
+      // Final section
+      const finalReveal = document.querySelector('.final .intro-reveal');
+      if (finalReveal) {
+        finalReveal.querySelector('.eyebrow').textContent = t.finalEyebrow;
+        finalReveal.querySelector('h2').textContent = t.finalTitle;
+        finalReveal.querySelector('.hero-copy').textContent = t.finalCopy;
+      }
+      
+      const contactPills = document.querySelectorAll('.contact-strip .contact-pill');
+      if (contactPills[0]) contactPills[0].textContent = t.contactWhatsapp;
+      if (contactPills[1]) contactPills[1].textContent = t.contactCall;
+      if (contactPills[2]) contactPills[2].textContent = t.contactEmail;
+      
+      const finalActions = document.querySelectorAll('.final-actions .button');
+      if (finalActions[0]) finalActions[0].textContent = t.finalChat;
+      if (finalActions[1]) finalActions[1].textContent = t.finalCall;
+      if (finalActions[2]) finalActions[2].textContent = t.finalJustdial;
+      
+      // Footer
+      const footerGrid = document.querySelectorAll('.footer-grid div');
+      if (footerGrid[1]) {
+        const footerContact = footerGrid[1];
+        footerContact.querySelector('strong').textContent = t.footerContact;
+      }
+      
+      // Floating quote
+      updateText('.floating-quote strong', t.floatingQuote);
+      document.querySelector('.floating-quote .button').textContent = t.floatingEstimate;
+    }
+
+    function updateText(selector, text) {
+      const el = document.querySelector(selector);
+      if (el) el.textContent = text;
+    }
+
+    // Language button event listeners
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    // Initialize with saved language or default to English
+    const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+    setLanguage(savedLanguage);
+
     const money = new Intl.NumberFormat("en-IN", { maximumFractionDigits: 1 });
     const homeType = document.querySelector("#homeType");
     const estimate = document.querySelector("#estimate");
